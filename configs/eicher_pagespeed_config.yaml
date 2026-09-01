@@ -1,0 +1,32 @@
+pagespeed_insight:
+  active: true
+  max_batches_per_job: 1
+  adaptive_framework_flag: true
+  receiver: "eicher.support@adglobal360.com"
+  version: "Gen1"
+  time_delta: 10
+  batch_size_in_day: 30
+  schema: "dev"
+  system_description: "Google PageSpeed Insights ingestion for Eicher Trucks & Buses website performance."
+  system_name: "pagespeed"
+  target_schema_type: "internal"
+
+  connections:
+    - active: true
+      name: "pagespeed"
+
+  objects:
+    - pagespeed:
+        active: true
+        api_url: "https://www.googleapis.com/pagespeedonline/v5/runPagespeed"
+        primary_key:
+        target_urls: ["https://www.eichertrucksandbuses.com", "https://smalltrucks.eichertrucksandbuses.com"]
+        columns_to_rename:
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+#        endpoint: "pagespeed"
+        ingestion_timestamp: "ingestion_timestamp"
+        load_type: "append"
+        area: "Core"
+        subarea: "pagespeed"

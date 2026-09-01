@@ -1,0 +1,32 @@
+google:
+  active: true
+  max_batches_per_job: 1
+  adaptive_framework_flag: true
+  receiver: "eicher.support@adglobal360.com"
+  version: "Gen1"
+  time_delta: 10
+  batch_size_in_day: 30
+  schema: "dev"
+  system_description: "Monitor the web and get emails when new results for a topic show up in Google Search for interesting content. At most once a day. Sources:Automatic,News,Blogs,Web,Video."
+  system_name: "google_alert"
+  target_schema_type: "internal"
+  rss_urls:
+    - "https://www.google.co.in/alerts/feeds/16608038455014902249/395531979286675118"
+    - "https://www.google.co.in/alerts/feeds/16608038455014902249/2523609355984953057"
+
+  connections:
+    - active: true
+      name: "google_alert"
+
+  objects:
+    - alert_raw:
+        active: true
+        emailer: "Google Alerts"
+        primary_key: "entry_id"
+        columns_to_rename:
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "google_alert"
+        ingestion_timestamp: "ingestion_timestamp"
+        load_type: "append"

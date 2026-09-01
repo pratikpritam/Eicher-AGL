@@ -1,0 +1,66 @@
+geobizz:
+  active: true
+  max_batches_per_job: 1
+  adaptive_framework_flag: true
+  receiver: "eicher.support@adglobal360.com"
+  version: "Gen1"
+  time_delta: 10
+  batch_size_in_day: 30
+  batch_size: 20000
+  schema: "dev"
+  system_description: "GeoBizz: Business driven problem based learning for academic excellence in geoinformatics Modern mapping solution for planning, tracking and analyzing"
+  system_name: "geobizz"
+  target_schema_type: "internal"
+  _accounts: ["5195098811","5740538866","5257289196","5506405366","5671753673","5218279736"]
+
+  connections:
+    - active: true
+      name: "geobizz_connection"
+
+  objects:
+    - groups_raw:
+        active: false   #Inactive as it's coming from Argya/Sharma Pipeline (31-March-2026)
+        collection: "groups"
+        primary_key: "id"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "geobizz"
+
+    - businesses_raw:
+        active: false   #Inactive as it's coming from Argya/Sharma Pipeline (31-March-2026)
+        collection: "businesses"
+        primary_key: "id"
+        incremental: true
+        pii_columns: []
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "geobizz"
+
+    - business_reviews_raw:
+        active: true
+        collection: "businessreviews"
+        primary_key: "id"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "geobizz"
+
+    - metrics_raw:
+        active: false   #Inactive as it's coming from Argya/Sharma Pipeline (31-March-2026)
+        collection: "metrics"
+        primary_key: "id"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "geobizz"
+
+    - reviews_raw:
+        active: true
+        collection: "reviews"
+        primary_key: "id"
+        incremental: true
+        pii_columns: ["reviewer_display_name"]
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "geobizz"

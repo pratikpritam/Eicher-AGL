@@ -1,0 +1,64 @@
+lms_ho_leads:
+  active: true
+  max_batches_per_job: 1
+  adaptive_framework_flag: true
+  receiver: "eicher.support@adglobal360.com"
+  version: "Gen1"
+  time_delta: 10
+  batch_size_in_day: 30
+  batch_size: 20000
+  schema: "dev"
+  system_description: "LMS HO Leads: Eicher Leads Management data --> Coming from API"
+  system_name: "lms_ho_leads"
+  pii_columns : {}
+  target_schema_type: "internal"
+  base_url: "https://cms.eichertrucksandbuses.com/quote_form/eicherCareLeadApi"
+  method: "POST"
+  schedule_time: "01:00"
+  date_format: "%Y-%m-%d"
+
+  backfill:
+    enabled: false
+    start_date: "2025-11-20"
+    end_date: null
+
+  connections:
+    - active: true
+      name: "lms_ho_leads"
+
+  objects:
+    - EicerCareLeads_raw:
+        active: true
+        api_key: "EicerCareLeads"
+        primary_key: "equote_id"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "lms"
+
+    - ContactEnquiryLeads_raw:
+        active: true
+        api_key: "ContactEnquiryLeads"
+        primary_key: "id"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "lms"
+
+    - LandingPageLeads_raw:
+        active: true
+        api_key: "LandingPageLeads"
+        primary_key: "id"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "lms"
+
+    - SCVLeads_raw:
+        active: true
+        api_key: "SCVLeads"
+        primary_key: "id"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "lms"

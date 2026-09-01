@@ -1,0 +1,43 @@
+cms:
+  active: true
+  max_batches_per_job: 1
+  adaptive_framework_flag: true
+  receiver: "eicher.support@adglobal360.com"
+  version: "Gen1"
+  time_delta: 10
+  batch_size_in_day: 30
+  schema: "dev"
+  system_description: "Eicher Call Center related Data will be stored here in System"
+  system_name: "ocms"
+  target_schema_type: "internal"
+  st_url: "https://cms.eichertrucksandbuses.com/webapi/getAllStateForLocateADealer"
+
+  connections:
+    - active: true
+      name: "ocms_connection"
+
+  objects:
+    - dealer_raw:
+        active: true
+        url: "https://cms.eichertrucksandbuses.com/webapi/getEicherLocateADealer"
+        primary_key: ["title", "lat", "lng"]
+        response_key: "dealer"
+        columns_to_rename: 
+        columns_to_drop: []
+        endpoint: "/getEicherLocateADealer"
+        drop_duplicate_check: false
+        domain: "eicher"
+        ingestion_timestamp: "ingestion_timestamp"
+
+    - cities_raw:
+        active: true
+        url: "https://cms.eichertrucksandbuses.com/webapi/getAllCitiesByStateForLocateADealer?state="
+        primary_key: ["states", "cities"]
+        columns_to_rename: 
+        columns_to_drop: []
+        endpoint: "/getAllCitiesByStateForLocateADealer"
+        drop_duplicate_check: false
+        domain: "eicher"
+        ingestion_timestamp: "ingestion_timestamp"
+
+

@@ -1,0 +1,23 @@
+# Core Python packages
+pandas
+pyyaml
+requests
+pyarrow
+fastparquet
+openpyxl
+
+pymongo
+cryptography
+
+# Airflow with Google Cloud support
+apache-airflow[gcp]
+
+# Google Cloud SDKs
+google-cloud-storage
+google-cloud-bigquery
+
+# Optional: typing hints
+typing-extensions
+
+# Optional: Google Cloud Secret Manager
+google-cloud-secret-manager

@@ -1,0 +1,31 @@
+hyp_emailer:
+  active: true
+  max_batches_per_job: 1
+  adaptive_framework_flag: true
+  receiver: "prateek.pandey@adglobal360.com"
+  version: "Gen1"
+  schema: "dev"
+  system_description: "Sending Emailer Parent_Dealer_Name wise from Hyperlocal Dashboards"
+  system_name: "hyp_emailer"
+  target_schema_type: "internal"
+  window_days: 10
+  SMTP_HOST: "smtp.gmail.com"
+  SMTP_PORT: 587
+  SMTP_USER: "eicher.support@adglobal360.com"
+  EMAIL_FROM: "eicher.support@adglobal360.com"
+  # cc_emailer:  ['dushyant.bhutani@adglobal360.com', 'ddnandanwar@vecv.in', 'ssinha@vecv.in', 'ksaini6@VECV.IN', 'charu.garg@adglobal360.com', 'vnayal@vecv.in', 'digvijay.singh@adglobal360.com']
+  cc_emailer:  ['digvijay.singh@adglobal360.com']         #Addition of QA Head for monitoring Purpose
+
+  connections:
+    - active: true
+      name: "hyp_emailer_connection"
+
+  objects:
+    - daily_emailer:
+        active: true
+        # primary_key: "id"
+        # SMTP_PASSWORD: your_app_password
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "hyp_emailer"

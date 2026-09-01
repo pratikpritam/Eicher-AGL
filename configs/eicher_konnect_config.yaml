@@ -1,0 +1,229 @@
+konnect_insight:
+  active: true
+  max_batches_per_job: 1
+  adaptive_framework_flag: true
+  receiver: "eicher.support@adglobal360.com"
+  version: "Gen1"
+  time_delta: 10
+  window_days: 30
+  schema: "dev"
+  system_description: "KONNECT Insight - Get a unified view of your customer across all touch points."
+  system_name: "konnect"
+  target_schema_type: "internal"
+  grp_url: "https://cxapi.konnectinsights.com/v2.1/groups?account_token=account__token&user_token=user__token"
+  prf_url: "https://cxapi.konnectinsights.com/v2.1/profiles?account_token=account__token&user_token=user__token&groupid=grpid&limit=100"
+
+
+  connections:
+    - active: true
+      name: "konnect"
+
+
+  backfill:
+    enabled: false
+    start_date: "2026-01-01"  #YYYY-MM-DD ---> Confirmed with Anoop (6 months before Sept 2025)
+    end_date: "2025-06-30"
+
+
+  objects:
+    - groups:
+        active: true
+        url: "https://cxapi.konnectinsights.com/v2.1/groups?account_token=account__token&user_token=user__token"
+        primary_key: "groupid"
+        columns_to_rename: 
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+#        endpoint: "groups"
+        ingestion_timestamp: "ingestion_timestamp"
+        area: "Core"
+        subarea: "Groups"
+
+    - profiles:
+        active: true
+        url: "https://cxapi.konnectinsights.com/v2.1/profiles?account_token=account__token&user_token=user__token&groupid=grpid&limit=100"
+        primary_key: "profileid"
+        columns_to_rename: 
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "profiles"
+        ingestion_timestamp: "ingestion_timestamp"
+
+    - topics:
+        active: false
+        url: "https://cxapi.konnectinsights.com/v2.1/topics?account_token=account__token&user_token=user__token&groupid=grpid"
+        primary_key: "topicid"
+        columns_to_rename: 
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "topics"
+        ingestion_timestamp: "ingestion_timestamp"
+        area: "Core"
+        subarea: "Topics"
+
+    - clusters:
+        active: false
+        url: "https://cxapi.konnectinsights.com/v2.1/clusters?account_token=account__token&user_token=user__token&groupid=grpid"
+        primary_key: "clusterid"
+        columns_to_rename: 
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "clusters"
+        ingestion_timestamp: "ingestion_timestamp"
+
+    - classifications:
+        active: false
+        url: "https://cxapi.konnectinsights.com/v1.0/classification?account_token=account__token&user_token=user__token&groupid=grpid"
+        primary_key: "classificationid"
+        columns_to_rename: 
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "classifications"
+        ingestion_timestamp: "ingestion_timestamp"
+
+    - severity:
+        active: false
+        url: "https://cxapi.konnectinsights.com/v1.0/severity?account_token=account__token&user_token=user__token&groupid=grpid"
+        primary_key: "severitytypeid"
+        columns_to_rename: 
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "severity"
+        ingestion_timestamp: "ingestion_timestamp"
+
+    - commenter_type:
+        active: false
+        url: "https://cxapi.konnectinsights.com/v1.0/CommenterType?account_token=account__token&user_token=user__token&groupid=grpid"
+        primary_key: "commentertypeid"
+        columns_to_rename: 
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "CommenterType"
+        ingestion_timestamp: "ingestion_timestamp"
+
+    - commenter_level:
+        active: false
+        url: "https://cxapi.konnectinsights.com/v1.0/CommenterLevel?account_token=account__token&user_token=user__token&groupid=grpid"
+        primary_key: "commenterlevelid"
+        columns_to_rename: 
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "CommenterLevel"
+        ingestion_timestamp: "ingestion_timestamp"
+
+    - conversation_type:
+        active: false
+        url: "https://cxapi.konnectinsights.com/v1.0/ConversationType?account_token=account__token&user_token=user__token&groupid=grpid"
+        primary_key: "conversationtypeid"
+        columns_to_rename: 
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "ConversationType"
+        ingestion_timestamp: "ingestion_timestamp"
+
+    - additional_info_fields:
+        active: false
+        url: "https://cxapi.konnectinsights.com/v1.0/AdditionalInfoFields?account_token=account__token&user_token=user__token&groupid=grpid"
+        primary_key: "conversationcustomfieldid"
+        columns_to_rename: 
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "AdditionalInfoFields"
+        ingestion_timestamp: "ingestion_timestamp"
+
+    - active_users_in_queue:
+        active: false
+        url: "https://cxapi.konnectinsights.com/v3.0/ActiveUsersInQueue?account_token=account__token&user_token=user__token&groupid=grpid"
+        primary_key: "userid"
+        columns_to_rename: 
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "ActiveUsersInQueue"
+        ingestion_timestamp: "ingestion_timestamp"
+
+    - youtube_raw:
+        active: true
+        url: "https://cxapi.konnectinsights.com/v2.0/SocialMessages/youtube?account_token=account__token&user_token=user__token&groupid=grpid&profileid=profile_id&since=_since&until=_until&limit=100000"
+        primary_key: "uniquemessageid"
+        columns_to_rename: 
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "SocialMessages/youtube"
+        ingestion_timestamp: "ingestion_timestamp"
+
+    - facebook_raw:
+        active: true
+        url: "https://cxapi.konnectinsights.com/v2.0/SocialMessages/facebook?account_token=account__token&user_token=user__token&groupid=grpid&profileid=profile_id&since=_since&until=_until&limit=100000"
+        primary_key: "uniquemessageid"
+        columns_to_rename: 
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "SocialMessages/facebook"
+        ingestion_timestamp: "ingestion_timestamp"
+
+    - instagram_raw:
+        active: true
+        url: "https://cxapi.konnectinsights.com/v2.0/SocialMessages/instagram?account_token=account__token&user_token=user__token&groupid=grpid&profileid=profile_id&since=_since&until=_until&limit=100000"
+        primary_key: "uniquemessageid"
+        columns_to_rename: 
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "SocialMessages/instagram"
+        ingestion_timestamp: "ingestion_timestamp"
+
+    - linkedin_raw:
+        active: true
+        url: "https://cxapi.konnectinsights.com/v2.0/SocialMessages/LinkedIn?account_token=account__token&user_token=user__token&groupid=grpid&profileid=profile_id&since=_since&until=_until&limit=100000"
+        primary_key: "uniquemessageid"
+        columns_to_rename: 
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "SocialMessages/LinkedIn"
+        ingestion_timestamp: "ingestion_timestamp"
+
+    - X_raw:
+        active: true
+        url: "https://cxapi.konnectinsights.com/v2.0/SocialMessages/Twitter?account_token=account__token&user_token=user__token&groupid=grpid&profileid=profile_id&since=_since&until=_until&limit=100000"
+        primary_key: "uniquemessageid"
+        columns_to_rename: 
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "SocialMessages/Twitter"
+        ingestion_timestamp: "ingestion_timestamp"
+
+    - social_insights_raw:
+        active: true
+        url: "https://cxapi.konnectinsights.com/v2.1/socialinsights?account_token=account__token&user_token=user__token&groupid=grpid&profileid=profile_id&since=_since&until=_until"
+        primary_key: ["profileid", "date"]
+        columns_to_rename: 
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "socialinsights"
+        ingestion_timestamp: "ingestion_timestamp"
+
+    - messages_raw:
+        active: true
+        url: "https://cxapi.konnectinsights.com/v2.1/messages?account_token=account__token&user_token=user__token&groupid=grpid&profileid=profile_id&since=_since&until=_until&limit=100000"
+        primary_key: "uniquemessageid"
+        columns_to_rename: 
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "messages"
+        ingestion_timestamp: "ingestion_timestamp"

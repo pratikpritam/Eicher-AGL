@@ -1,0 +1,33 @@
+cdr:
+  active: true
+  max_batches_per_job: 1
+  adaptive_framework_flag: true
+  receiver: "eicher.support@adglobal360.com"
+  version: "Gen1"
+  time_delta: 10
+  window_days: 30
+  schema: "dev"
+  system_name: "cdr"
+  system_description: "Call Detail Records: A Dailer Caller with Mobile Number Centric Data"
+  target_schema_type: "internal"
+
+  connections:
+    - active: true
+      name: "cdr_connection"
+
+  backfill:
+    enabled: false
+    start_date: "2026-02-01"  #YYYY-MM-DD ---> Confirmed with Vasu for Lead_Management_Desk
+    end_date: "2026-07-31"
+
+  objects:
+    - call_record_raw:
+        active: true
+        url: "https://prs.cogentlab.com:8092/vecvcdr/cdr.php"
+        method: "GET"
+        primary_key: "accountcode"
+        incremental: true
+        backfill: true
+        ingestion_timestamp: "ingestion_timestamp"
+        drop_duplicate_check: true
+        domain: "cdr"

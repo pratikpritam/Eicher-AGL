@@ -1,0 +1,28 @@
+lms:
+  active: true
+  max_batches_per_job: 1
+  adaptive_framework_flag: true
+  receiver: "eicher.support@adglobal360.com"
+  version: "Gen1"
+  time_delta: 10
+  batch_size_in_day: 30
+  batch_size: 20000
+  schema: "dev"
+  system_description: "LMS: Eicher Leads Management System data"
+  system_name: "lms"
+  pii_columns : {"phone", "agent_number", "alternate_phone", "busy_callees", "crm_owner_id", "crm_owner_name", "email", "first_name", "last_name", "next_followup_data_created_by_id", "next_followup_data_created_by_name", "next_followup_data_owner_id", "next_followup_data_owner_name", "updated_by_id", "updated_by_name"}
+  target_schema_type: "internal"
+
+  connections:
+    - active: true
+      name: "lms_connection"
+
+  objects:
+    - enquries_raw:
+        active: true
+        collection: "enquries"
+        primary_key: "id"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "lms"

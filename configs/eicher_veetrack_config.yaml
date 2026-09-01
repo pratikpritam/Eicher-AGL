@@ -1,0 +1,32 @@
+veetrack_news:
+  active: true
+  max_batches_per_job: 1
+  adaptive_framework_flag: true
+  receiver: "eicher.support@adglobal360.com"
+  version: "Gen1"
+  time_delta: 10
+  batch_size_in_day: 30
+  schema: "dev"
+  system_description: "Article is tracked by VeeTrack Pvt Ltd specially for Volvo Eicher client from Vee Technologies. The content belongs to the respective sources . For any clarification please contact mediatrack@veetrack.com."
+  system_name: "veetrack"
+  target_schema_type: "internal"
+
+  connections:
+    - active: true
+      name: "veetrack"
+
+  objects:
+    - veetrack:
+        active: true
+        emailer: VeetrackDailyMediaMonitoringUpdates
+        primary_key: ["headline", "link"]
+        section_pattern: ["Competition News", "Commercial Vehicles", "Industry News", "VECV Specific News", "Company Specific News"]
+        columns_to_rename:
+        columns_to_drop: []
+        drop_duplicate_check: false
+        domain: "eicher"
+        endpoint: "veetrack"
+        ingestion_timestamp: "ingestion_timestamp"
+        load_type: "append"
+        area: "Core"
+        subarea: "veetrack"

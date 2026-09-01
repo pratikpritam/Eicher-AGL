@@ -1,0 +1,233 @@
+ocms:
+  active: true
+  max_batches_per_job: 1
+  adaptive_framework_flag: true
+  receiver: "eicher.support@adglobal360.com"
+  version: "Gen1"
+  time_delta: 10
+  batch_size_in_day: 30
+  schema: "dev"
+  system_description: "OCMS Online Consent Management & Monitoring System  for Eicher client · Consent to Establish / Consent to Operate · Authorization."
+  system_name: "ocms"
+  target_schema_type: "internal"
+
+  connections:
+    - active: true
+      name: "ocms_connection"
+
+  objects:
+    - activities_raw:
+        active: true
+        table: "ocms_activities"
+        primary_key: "activity_id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - activity_checklist_raw:
+        active: true
+        table: "ocms_activity_checklist"
+        primary_key: "checklist_id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - application_raw:
+        active: true
+        table: "ocms_application"
+        primary_key: "application_key"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - attendees_raw:
+        active: false
+        table: "attendees"
+        primary_key: "id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - attendance_raw:
+        active: false
+        table: "ocms_attendance"
+        primary_key: "id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - approvals_raw:
+        active: true
+        table: "ocms_approvals"
+        primary_key: "id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - campaigns_raw:
+        active: true
+        table: "ocms_campaigns"
+        primary_key: "id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - collateral_language_raw:
+        active: true
+        table: "ocms_collateral_language"
+        primary_key: "id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - dealerbudgetallocation_raw:
+        active: true
+        table: "ocms_dealerbudgetallocation"
+        primary_key: "id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - kpi_raw:
+        active: true
+        table: "ocms_kpi"
+        primary_key: "kpi_id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - master_collateral_raw:
+        active: true
+        table: "ocms_master_collateral"
+        primary_key: "id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - objectives_raw:
+        active: true
+        table: "ocms_objectives"
+        primary_key: "objective_id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - permissions_raw:
+        active: true
+        table: "ocms_permissions"
+        primary_key: "id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - role_permissions_raw:
+        active: true
+        table: "ocms_role_permissions"
+        primary_key: "id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - roles_raw:
+        active: true
+        table: "ocms_roles"
+        primary_key: "id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - sap_role_mappings_raw:
+        active: true
+        table: "ocms_sap_role_mappings"
+        primary_key: "id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - segment_raw:
+        active: true
+        table: "ocms_segment"
+        primary_key: "segment_key"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - sub_activities_raw:
+        active: true
+        table: "ocms_sub_activities"
+        primary_key: "sub_activity_id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - sub_activity_checklist_raw:
+        active: true
+        table: "ocms_sub_activity_checklist"
+        primary_key: ["sub_activity_id", "checklist_id"]
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - sub_activity_kpi_raw:
+        active: true
+        table: "ocms_sub_activity_kpi"
+        primary_key: ["sub_activity_id", "kpi_id"]
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - sub_vertical_raw:
+        active: true
+        table: "ocms_sub_vertical"
+        primary_key: "sub_vertical_key"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - users_raw:
+        active: true
+        table: "ocms_users"
+        primary_key: "username"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - vertical_raw:
+        active: true
+        table: "ocms_vertical"
+        primary_key: "vertical_id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - cc_call_activity_raw:
+        active: true
+        table: "cc_call_activity"
+        primary_key: "id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - cc_dealer_master_lms_raw:
+        active: false
+        table: "cc_dealer_master_lms"
+        primary_key: "dealer_code"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - cc_leads_data_raw:
+        active: true
+        table: "cc_leads_data"
+        primary_key: "id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"
+
+    - cc_sub_vertical_raw:
+        active: false
+        table: "cc_sub_vertical"
+        primary_key: "id"
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "ocms"

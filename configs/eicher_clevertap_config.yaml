@@ -1,0 +1,54 @@
+clevertap:
+  active: true
+  max_batches_per_job: 1
+  adaptive_framework_flag: true
+  receiver: "eicher.support@adglobal360.com"
+  version: "Gen1"
+  time_delta: 10
+  batch_size_in_day: 30
+  batch_size: 20000
+  schema: "dev"
+  system_description: "Clevertap CDP Platform --> Campaign List via API & Campaign Reports via GCS"
+  # system_name: "clevertap"
+  pii_columns: {}
+  target_schema_type: "internal"
+  backfill:
+    enabled: true
+    start_date: "2026-03-01"
+    end_date: null
+
+  connections:
+    - active: true
+      name: "clevertap"
+
+  gcs:
+    active: true
+    prefix: "1758129920/reports/"
+    # file_extension: ".csv"
+    # delimiter: ","
+    # encoding: "utf-8"
+    # quotechar: '"'
+    skip_leading_rows: 1
+    load_strategy: "latest"
+
+  objects:
+    - campaign_list_raw:
+        active: false
+        primary_key: "id"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "clevertap"
+
+    - campaign_reports_gcs_raw:
+        active: true
+        primary_key:
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "clevertap"
+        source: "gcs"
+        audit_columns:
+          source_file_name: true
+          file_updated_time: true
+          ingestion_timestamp: true

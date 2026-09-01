@@ -1,0 +1,128 @@
+sap:
+  active: true
+  max_batches_per_job: 1
+  adaptive_framework_flag: true
+  receiver: "eicher.support@adglobal360.com"
+  version: "Gen2"
+  schema: "dev"
+  system_description: "SAP: Business driven problem based learning (Order, Retail, EMS, QoC, ESAT)"
+  system_name: "sap"
+  target_schema_type: "internal"
+
+  timeout_seconds: 120
+  retry_attempts: 3
+  sleep_after_every_n_calls: 5
+  sleep_duration_seconds: 20
+  window_days: 10
+
+  backfill:
+    enabled: false
+    start_date: "2023-06-01"
+    # start_date: "2025-03-01"
+    end_date: "2026-04-30"
+
+  connections:
+    - active: true
+      name: "sap_connection"
+
+  objects:
+    - order_results_raw:
+        active: false
+        primary_key: "id"
+        date_mode: "datetime"
+        base_url: "https://sapfioriqa.vecv.net/sap/opu/odata/sap/ZCRM_M14_Q0018_SRV/ZCRM_M14_Q0018(ZVAR_IN_CAL01=datetime'{start}',ZVAR_IN_CAL01To=datetime'{end}',ZVERT_OPT='',ZVAR_DEALER='')/Results?$format=json"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "sap"
+
+    - detail_loss_raw:
+        active: true
+        primary_key: "id"
+        date_mode: "datetime"
+        base_url: "https://udaanmobility.vecv.net/sap/opu/odata/sap/ZCRM_M15_Q0002_API_SRV/ZCRM_M15_Q0002_API(ZVAR_PLANT='',ZVAR_IN_CAL01=datetime'{start}',ZVAR_IN_CAL01To=datetime'{end}')/Results?$format=json"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "sap"
+
+    - detail_pipeline_raw:
+        active: true
+        primary_key: "id"
+        date_mode: "datetime"
+        #base_url: "https://udaanmobility.vecv.net/sap/opu/odata/sap/ZCRM_M14_Q0001_API_SRV/ZCRM_M14_Q0001_API(ZVAR_PLANT='',ZENQ_POSTING_DT=datetime'{start}',ZENQ_POSTING_DTTo=datetime'{end}',ZUP_DT_INT_IR_OPN=datetime'1900-01-01T00:00:00',ZUP_DT_INT_IR_OPNTo=datetime'2100-01-01T00:00:00')/Results?$format=json"
+        base_url: "https://udaanmobility.vecv.net/sap/opu/odata/sap/ZCRM_M14_Q0001_API_SRV/ZCRM_M14_Q0001_API(ZVAR_PLANT='',ZENQ_POSTING_DT=datetime'1900-01-01T00:00:00',ZENQ_POSTING_DTTo=datetime'2100-01-01T00:00:00',ZUP_DT_INT_IR_OPN=datetime'{start}',ZUP_DT_INT_IR_OPNTo=datetime'{end}')/Results?$format=json"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "sap"    
+
+    - retail_raw:
+        active: true
+        primary_key: "id"
+        date_mode: "datetime"
+        base_url: "https://udaanmobility.vecv.net/sap/opu/odata/sap/ZSD_M53_Q0001_API_SRV/ZSD_M53_Q0001_API(ZCAL_INT_VAR01=datetime'{start}',ZCAL_INT_VAR01To=datetime'{end}')/Results?$format=json"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "sap"
+
+    - esat_raw:
+        active: true
+        primary_key: "id"
+        date_mode: "month"
+        base_url: "https://udaanmobility.vecv.net/sap/opu/odata/sap/ZESAT_M1_Q0001_API_SRV/ZESAT_M1_Q0001_API(ZCAL_MONTH_INTERVAL='{month}',ZCAL_MONTH_INTERVALTo='{month_to}',ZVAR_PLANT='')/Results?$format=json"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "sap"
+
+    - ems_raw:
+        active: true
+        primary_key: "id"
+        date_mode: "financial_period"
+        base_url: "https://udaanmobility.vecv.net/sap/opu/odata/sap/ZSLS_CP019_Q0002_SRV/ZSLS_CP019_Q0002(ZVAR_PLANT='',ZVAR_0FIC_PER='{fiscal_period}',ZVAR_0FIC_PERTo='{fiscal_period_to}')/Results?$format=json"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "sap"
+
+    - target_pool_raw:
+        active: true
+        primary_key: "id"
+        date_mode: "datetime"
+        base_url: "https://udaanmobility.vecv.net/sap/opu/odata/sap/ZCRM_M02_Q0001_API_SRV/ZCRM_M02_Q0001_API(ZVAR_PLANT='',ZVAR_TP_CREATION_DATE=datetime'{start}',ZVAR_TP_CREATION_DATETo=datetime'{end}')/Results?$format=json"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "sap"
+
+    - customer_creation_raw:
+        active: true
+        primary_key: "id"
+        date_mode: "datetime_millis"
+        base_url: "https://udaanmobility.vecv.net/sap/opu/odata/sap/Z_0BPARTNER_Q0001_SRV/Z_0BPARTNER_Q0001(A0P_CDAY=datetime'{start}',A0P_CDAYTo=datetime'{end}')/Results?$format=json"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "sap"
+
+    - qoc_excluding_scv_raw:
+        active: true
+        primary_key: "id"
+        date_mode: "month"
+        base_url: "https://udaanmobility.vecv.net/sap/opu/odata/sap/ZSLS_CP31_Q0001_API_SRV/ZSLS_CP31_Q0001_API(ZDLR_PART='',ZVARCMONTH='{month}')/Results?$format=json"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "sap"
+
+    - qoc_scv_raw:
+        active: true
+        primary_key: "id"
+        date_mode: "month"
+        base_url: "https://udaanmobility.vecv.net/sap/opu/odata/sap/ZSLS_CP35_Q0001_API_SRV/ZSLS_CP35_Q0001_API(ZVARCMONTH='{month}',ZDLR_PART='')/Results?$format=json"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "sap"

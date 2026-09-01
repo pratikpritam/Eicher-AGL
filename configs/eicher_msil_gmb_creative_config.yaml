@@ -1,0 +1,27 @@
+msil_gmb:
+  active: true
+  max_batches_per_job: 1
+  adaptive_framework_flag: true
+  receiver: "eicher.support@adglobal360.com"
+  version: "Gen1"
+  time_delta: 10
+  batch_size_in_day: 30
+  batch_size: 20000
+  schema: "dev"
+  system_description: "gmb_creative: Eicher Creatives Data coming from MongoDB"
+  system_name: "gmb_creative"
+  target_schema_type: "internal"
+
+  connections:
+    - active: true
+      name: "gmb_creative_connection"
+
+  objects:
+    - creative_raw:
+        active: true
+        collection: "eichercreativehashurls"
+        primary_key: "id"
+        incremental: true
+        drop_duplicate_check: true
+        ingestion_timestamp: "ingestion_timestamp"
+        domain: "gmb_creative" 
